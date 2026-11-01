@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientists Learning Center - Bimbel Kurikulum Nasional</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel Standalone for JSX Transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+        body { font-family: 'Plus Jakarta+Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 selection:bg-teal-500 selection:text-white min-h-screen">
+    <!-- Root Container for React App -->
+    <div id="root"></div>
+
+    <!-- Main React Application Script -->
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { 
+            BookOpen, Award, MessageSquare, UserCheck, LogOut, Key, Mail, User, 
+            Search, CheckCircle2, XCircle, Clock, ChevronRight, GraduationCap, 
+            Sparkles, FileText, Send, Lock, HelpCircle, ArrowLeft, RefreshCw, BarChart2,
+            Calendar, Check, ShieldCheck, HeartHandshake, Home, PlayCircle, Volume2, 
+            Download, Printer, Filter, CheckCircle, AlertCircle, Edit3, Save, ChevronLeft,
+            Users, MessageCircle, Info, Star, Bookmark, Tag, Briefcase, ChevronDown, X, Building
+        } = LucideIcons;
+
+        // ==========================================
+        // DATA KURIKULUM, MATERI & FORMATIF
+        // ==========================================
+
+        const LEVELS = [
+            { id: 'SD', name: 'Sekolah Dasar (SD)', grades: ['Kelas 1', 'Kelas 2', 'Kelas 3', 'Kelas 4', 'Kelas 5', 'Kelas 6'] },
+            { id: 'SMP', name: 'Sekolah Menengah Pertama (SMP)', grades: ['Kelas 7', 'Kelas 8', 'Kelas 9'] },
+            { id: 'SMA', name: 'Sekolah Menengah Atas (SMA)', grades: ['Kelas 10', 'Kelas 11', 'Kelas 12'] },
+        ];
+
+        const SUBJECTS_LIST = [
+            { id: 'matematika', name: 'Matematika', icon: '📐', cat: ['SD', 'SMP', 'SMA'] },
+            { id: 'ipa', name: 'IPA (Ilmu Pengetahuan Alam)', icon: '🔬', cat: ['SD', 'SMP'] },
+            { id: 'ips', name: 'IPS (Ilmu Pengetahuan Sosial)', icon: '🌍', cat: ['SD', 'SMP'] },
+            { id: 'pkn', name: 'Pendidikan Pancasila & Kewarganegaraan', icon: '🇮🇩', cat: ['SD', 'SMP', 'SMA'] },
+            { id: 'bindonesia', name: 'Bahasa Indonesia', icon: '📚', cat: ['SD', 'SMP', 'SMA'] },
+            { id: 'binggris', name: 'Bahasa Inggris', icon: '🔤', cat: ['SD', 'SMP', 'SMA'] },
+            { id: 'barab', name: 'Bahasa Arab', icon: '🕌', cat: ['SD', 'SMP', 'SMA'] },
+            { id: 'tahfidz', name: 'Tahfidz Al-Qur\'an', icon: '📖', cat: ['SD', 'SMP', 'SMA'] },
+            { id: 'tahsin', name: 'Tahsin Al-Qur\'an', icon: '✨', cat: ['SD', 'SMP', 'SMA'] },
+            { id: 'fisika', name: 'Fisika', icon: '⚡', cat: ['SMA'] },
+            { id: 'kimia', name: 'Kimia', icon: '🧪', cat: ['SMA'] },
+            { id: 'biologi', name: 'Biologi', icon: '🧬', cat: ['SMA'] },
+            { id: 'geografi', name: 'Geografi', icon: '🗺️', cat: ['SMA'] },
+            { id: 'sosiologi', name: 'Sosiologi', icon: '👥', cat: ['SMA'] },
+            { id: 'ekonomi', name: 'Ekonomi', icon: '📊', cat: ['SMA'] },
+            { id: 'sejarah', name: 'Sejarah', icon: '🏛️', cat: ['SMA'] },
+            { id: 'pjok', name: 'PJOK (Pendidikan Jasmani & Kesehatan)', icon: '⚽', cat: ['SD', 'SMP', 'SMA'] },
+            { id: 'pai', name: 'Pendidikan Agama Islam (PAI)', icon: '☪️', cat: ['SD', 'SMP', 'SMA'] },
+        ];
+
+        // Data Artikel Edukasi
+        const ARTICLES_DATA = [
+            {
+                id: 1,
+                title: 'Strategi Efektif Menguasai Soal HOTS Matematika & Fisika',
+                category: 'Metode Belajar',
+                date: '28 Oktober',
+                readTime: '5 min baca',
+                summary: 'Tips dan logika berpikir cepat dalam menyelesaikan soal Higher Order Thinking Skills tanpa menghafal rumus rumit.',
+                content: 'Menguasai soal HOTS memerlukan pemahaman konsep dasar yang kuat dan kemampuan menghubungkan berbagai teorema. Pertama, identifikasi variabel utama dalam soal. Kedua, gunakan metode diagram visual untuk merumuskan masalah...'
+            },
+            {
+                id: 2,
+                title: 'Panduan Mudah Menghafal Al-Qur\'an (Tahfidz & Tahsin) untuk Pelajar',
+                category: 'Keislaman',
+                date: '25 Oktober',
+                readTime: '4 min baca',
+                summary: 'Metode Murajaah harian dan perbaikan tajwid agar hafalan kuat dan tidak mudah lupa di tengah kesibukan sekolah.',
+                content: 'Kunci utama dalam program Tahfidz di Scientists Learning Center adalah mengombinasikan metode Tikrar (pengulangan 20x) dengan perbaikan makhraj huruf (Tahsin) secara berkala sebelum menambah ayat baru...'
+            },
+            {
+                id: 3,
+                title: 'Persiapan Menghadapi Asesmen Formatif & Ujian Nasional',
+                category: 'Ujian & Asesmen',
+                date: '20 Oktober',
+                readTime: '6 min baca',
+                summary: 'Manfaatkan 10 siklus Formatif terstruktur untuk mengukur kesiapan belajar dan mencapai nilai raport maksimal.',
+                content: 'Evaluasi formatif yang dilakukan secara berkala terbukti meningkatkan retensi memori hingga 80%. L
